@@ -13,23 +13,26 @@ class AppComponent extends React.Component {
       super();
       this.state = {
         words: ['alpha', 'bravo', 'charlie'],
-        index: 0
+        index: 0,
+        inputValue: ''
       };
+    }
+    handleInputChange(evt) {
+        const inputValue = evt.target.value;
+        const word = this.state.words[this.state.index];
+        if (word == inputValue) {
+            var nextIndex = (this.state.index == this.state.words.length-1)? 0 : this.state.index+1;
+            this.setState({ index: nextIndex, inputValue: '' });
+        } else {
+            this.setState({ inputValue: inputValue });
+        }
     }
     renderWordsource() {
       const word = this.state.words[this.state.index];
       return <WordsourceComponent value={ word } />;
     }
     renderWordinput() {
-      return <WordinputComponent id={1} onChange={ this.onChange.bind(this) }/>;
-    }
-    onChange(id, value) {
-        const word = this.state.words[this.state.index];
-        if (word == value) {
-            alert('yes');
-            var nextIndex = (this.state.index == this.state.words.count-1)? 0 : this.state.index+1;
-            this.setState({ words:this.state.words, index:nextIndex });
-        }
+      return <WordinputComponent value={this.state.inputValue} onChange={this.handleInputChange.bind(this)}/>
     }
     render() {
       return (

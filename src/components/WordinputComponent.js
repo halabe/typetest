@@ -5,14 +5,10 @@ import React from 'react';
 require('styles//Wordinput.css');
 
 class WordinputComponent extends React.Component {
-    handleChange(event) {
-      var text = event.target.value;
-      this.props.onChange(this.props.id, text);
-    }
     render() {
       return (
         <div className="wordinput-component">
-          <input type="text" onChange={this.handleChange.bind(this)} />
+          <input type="text" value={this.props.value} onChange={this.props.onChange} />
         </div>
       );
     }
